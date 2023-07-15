@@ -11,7 +11,6 @@ const SignupMail = use('App/Jobs/SignupMail');
 const User = exports = module.exports = {}
 
 User.registered = async (data) => {
-    
     if(data.user_type == "MENTOR"){
         await MentorModel.create({
             user_id: data.id,
@@ -21,8 +20,6 @@ User.registered = async (data) => {
     }
     if(data.user_type == "MENTEE"){
        var x=  kue.dispatch(SignupMail.key, {name: data.first_name, email: data.email});
-        // console.log("signup register mail mentee");
-        // console.log(x);
     }
 }
 
